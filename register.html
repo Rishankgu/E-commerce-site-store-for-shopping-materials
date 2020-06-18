@@ -1,0 +1,45 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+     <link href="register.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+   <div class="loginbox">
+      <img src="images.png" alt="icons" class="avatar">
+       <h1>Login Here</h1>
+       <form action="login.php" method="post">
+           <p>Username</p>
+           <input type="text" name="username" placeholder="Enter username">
+           <p>Password</p>
+           <input type="password" name="password" placeholder="Enter password">
+           <input type="Submit" name="submit" value="login">
+           <a href="forget.html">Forget Password?</a><br>
+           <a href="signup.html">Don't have an account?</a>
+       </form>
+   </div>
+    <?php
+    if(isset($_POST["submit"]))
+    {
+    mysql_connect("localhost","root","");
+    mysql_select_db("login");
+    $res=mysql_query("select*from login where username='$POST[username]' && password='$_POST[password]'");
+    while($row=mysql_fetch_array($res))
+    {
+    $_SESSION("unm")=$row["username"];
+    
+    ?>
+    <script type="text/javascript">
+        window.location="mysite.php";
+        
+    </script>
+    <?php
+    }
+    }
+    ?>
+</body>
+</html> 

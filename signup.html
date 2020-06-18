@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+     <link href="signup.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+   <div class="loginbox">
+       <h3>Signup here</h3>
+       <form action="">
+           <p>Name</p>
+           <input type="text" name="username" placeholder="Enter username">
+            <p>Email</p>
+           <input type="text" name="email" placeholder="Enter email">
+            <p>Contact no</p>
+           <input type="number" name="num" placeholder="Enter contact no">
+           <p>Password</p>
+           <input type="password" name="password" placeholder="Enter password">
+           <p>Confirm Password</p>
+           <input type="password" name="cpassword" placeholder="Enter password">
+           <input type="Submit" name="submit" value="Submit">
+           <a href="register.html">Back</a><br>
+           
+       </form>
+   </div>
+       <?php
+           $host = "localhost";
+           $username = "root";
+           $password = "";
+           if(isset($_POST["submit"]))
+           {
+               $con = mysqli_connect ($host , $username, $password );
+              // Check connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+} 
+
+// Create database
+$sql = "CREATE DATABASE myDB";
+if (mysqli_query($con, $sql)) {
+    echo "Database created successfully";
+} else {
+    echo "Error creating database: " . mysqli_error($con);
+}
+// sql to create table
+$sql1 = "CREATE TABLE signup (
+username varchar(40) NOT NULL, 
+Email VARCHAR(30) NOT NULL,
+contact_no VARCHAR(30) NOT NULL,
+password VARCHAR(50) NOT NULL,
+reg_date TIMESTAMP
+)";
+
+if (mysqli_query($conn, $sql)) {
+    echo "Table signup created successfully";
+} else {
+    echo "Error creating table: " . mysqli_error($conn);
+}
+
+mysqli_close($con);
+?>
+</body>
+</html>
